@@ -1,21 +1,60 @@
 package tests;
 
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
 
+@TestMethodOrder(MethodOrderer.class)
+@Execution(ExecutionMode.CONCURRENT)
 public class LoginTest extends BaseTest {
 
-    @Test(testName = "Проверка входа в магазин с позитвными данными",
-            description = "Проверка входа в магазин с позитвными данными",
-            priority = 1, groups = {"smoke"})
+
+    @org.junit.jupiter.api.Test
+    @DisplayName("Проверка позитвного логина")
+    @Disabled
+    @Timeout(1000)
+    @Order(1)
+    @Tag("positive")
+    @Execution(ExecutionMode.CONCURRENT)
     public void checkPositiveLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPage.getTitle(),
                 "Products",
                 "Логин не выполнен");
+
+
+        assertThat(productsPage.getTitle()).isEqualTo("Products");
+
+        assertThat(5)
+                .isPositive()
+                .isLessThan(6)
+                .isGreaterThan(2);
+
+        assertThat("Students QA31")
+                .startsWith("Students")
+                .endsWith("31")
+                .contains("QA")
+                .isNotEmpty();
+
+        List<String> products = List.of("T-Shirt", "Backpack", "Light");
+
+        assertThat(products)
+                .hasSize(3)
+                .contains("T-Shirt")
+                .contains("Backpack")
+                .contains("Light")
+                .doesNotContain("Bla bla bla");
+
     }
 
     @Test(enabled = false)
@@ -58,6 +97,20 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "Проверка логина с негативными данными")
     public void paramNegativeTest(String user, String password, String expectedErrorMessage) {
+        loginPage.open();
+        loginPage.login(user, password);
+        assertEquals(loginPage.getErrorMessage(),
+                expectedErrorMessage,
+                "Сообщение об ошибке не соотвествует");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'', secret_sauce, 'Epic sadface: Username is required'",
+            "standard_user, '', 'Epic sadface: Password is required'",
+            "test, test, 'Epic sadface: Username and password do not match any user in this service'"
+    })
+    public void paramNegativeTestJUnit(String user, String password, String expectedErrorMessage) {
         loginPage.open();
         loginPage.login(user, password);
         assertEquals(loginPage.getErrorMessage(),
