@@ -1,7 +1,11 @@
 package tests;
 
+import com.google.common.collect.Ordering;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CartTest extends BaseTest {
 
@@ -25,6 +29,14 @@ public class CartTest extends BaseTest {
         Assert.assertEquals(cartPage.getProductNameFromCart(0),
                 product,
                 "Товар отсутствует в корзине");
+    }
+
+    @Test
+    public void test() {
+        List<String> names = Arrays.asList("Vlad", "Timoifei", "Alisa");
+
+        boolean isSorted = Ordering.natural().reverse().isOrdered(names);
+        Assert.assertTrue(isSorted);
     }
 }
 

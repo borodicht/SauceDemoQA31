@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +11,16 @@ public class LoginTest extends BaseTest {
     @Test(testName = "Проверка входа в магазин с позитвными данными",
             description = "Проверка входа в магазин с позитвными данными",
             priority = 1, groups = {"smoke"})
+    @Description("Проверка входа в магазин с позитвными данными")
+    @Owner("Borodich Timofei")
+    @Link("https://allurereport.org/docs/testng/")
+    @Epic("SauceDemo Login Page")
+    @Feature("Log in")
+    @Story("Log in with positive cred")
+    @Severity(SeverityLevel.CRITICAL)
+    @Lead("Bill Geitz")
+    @TmsLink("SD-01")
+    @Issue("SD_01/1")
     public void checkPositiveLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -18,7 +29,7 @@ public class LoginTest extends BaseTest {
                 "Логин не выполнен");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkLoginWithEmptyPassword() {
         loginPage.open();
         loginPage.login("standard_user", "");

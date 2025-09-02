@@ -1,8 +1,12 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import tests.AllureUtils;
+
+import static tests.AllureUtils.takeScreenshot;
 
 public class LoginPage extends BasePage {
 
@@ -15,11 +19,13 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы LoginPage")
     public void open() {
         driver.get(BASE_URL);
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
     }
 
+    @Step("Вход в магазин SauceDemo с именем пользователя: '{user}' и паролем: '{password}'")
     public void login(String user, String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(USERNAME_INPUT));
         driver.findElement(USERNAME_INPUT).sendKeys(user);
