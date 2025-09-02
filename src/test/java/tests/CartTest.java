@@ -20,7 +20,7 @@ public class CartTest extends BaseTest {
         d. Проверить (assertEquals) стоимость товара и его имя в корзине
          */
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.isPageOpened();
         productsPage.addToCart(product);
         productsPage.clickToCart();
