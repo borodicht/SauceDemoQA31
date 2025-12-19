@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1636","checkLocators","Smoke Test SauceDemo","Fri Dec 19 10:18:48 UTC 2025","passed","Fri Dec 19 10:18:50 UTC 2025","tests.LocatorsTest","Chrome","tests.LocatorsTest","checkLocators"
+"","1434","checkCart","Smoke Test SauceDemo","Fri Dec 19 10:18:53 UTC 2025","passed","Fri Dec 19 10:18:54 UTC 2025","tests.CartTest","Firefox","tests.CartTest","checkCart"
+"Проверка входа в магазин с позитвными данными","765","Проверка входа в магазин с позитвными данными","Smoke Test SauceDemo","Fri Dec 19 10:18:50 UTC 2025","passed","Fri Dec 19 10:18:51 UTC 2025","tests.LoginTest","Chrome","tests.LoginTest","checkPositiveLogin"
